@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import Title from '../components/common/Title';
 import InputText from '../components/common/InputText';
 import Button from '../components/common/Button';
@@ -20,11 +19,16 @@ function Login() {
   const { isLoggedIn, storeLogin, storeLogout } = useAuthStore();
 
   const onSubmit = (data: SignupProps) => {
-    login(data).then((res) => {
-      storeLogin(res.token);
-      showAlert('로그인 완료');
-      navigate('/');
-    });
+    login(data).then(
+      (res) => {
+        storeLogin(res.token);
+        showAlert('로그인 완료');
+        navigate('/');
+      },
+      (err) => {
+        showAlert('로그인 실패');
+      }
+    );
   };
 
   console.log(isLoggedIn);
