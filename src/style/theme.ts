@@ -1,6 +1,12 @@
 // export default types
 export type ThemeName = 'light' | 'dark';
-export type ColorKey = 'primary' | 'background' | 'secondary' | 'third' | 'border' | 'text';
+export type ColorKey =
+  | 'primary'
+  | 'background'
+  | 'secondary'
+  | 'third'
+  | 'border'
+  | 'text';
 export type HeadingSize = 'large' | 'medium' | 'small';
 export type ButtonSize = 'large' | 'medium' | 'small';
 export type ButtonScheme = 'primary' | 'normal';
@@ -63,8 +69,8 @@ export const light: Theme = {
     small: { fontSize: '0.75rem', padding: '0.25rem 0.75rem' },
   },
   buttonScheme: {
-    primary: { color: 'white', backgroundColor: 'green' },
-    normal: { color: 'white', backgroundColor: 'red' },
+    primary: { color: 'white', backgroundColor: 'blue' },
+    normal: { color: 'black', backgroundColor: 'lightgray' },
   },
   borderRadius: {
     default: '4px',
