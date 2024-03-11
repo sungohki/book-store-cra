@@ -2,43 +2,56 @@ import styled from 'styled-components';
 import Title from '../components/common/Title';
 import InputText from '../components/common/InputText';
 import Button from '../components/common/Button';
-import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { signup } from '../api/auth.api';
+import { useAlert } from '../hooks/useAlert';
+
+export interface SignupProps {
+  email: string;
+  password: string;
+}
 
 function Signup() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const showAlert = useAlert();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignupProps>();
 
-  const onEvent = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(email);
-    console.log(password);
+  const onSubmit = (data: SignupProps) => {
+    // signup(data).then((res) => {
+    showAlert('회원 가입 완료');
+    navigate('/login');
+    // });
   };
 
   return (
     <>
       <Title size="large">회원가입</Title>
       <SignupStyle>
-        <form onSubmit={onEvent}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset>
             <InputText
               placeHolder="이메일"
               inputType="email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
+              {...register('email', { required: true })}
             />
+            {errors.email && (
+              <p className="error-text">이메일을 입력해주세요.</p>
+            )}
           </fieldset>
           <fieldset>
             <InputText
               placeHolder="비밀번호"
               inputType="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
+              {...register('password', { required: true })}
             />
+            {errors.password && (
+              <p className="error-text">비밀번호를 입력해주세요.</p>
+            )}
           </fieldset>
           <fieldset>
             <Button type="submit" size="medium" scheme="primary">
