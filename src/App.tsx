@@ -5,6 +5,7 @@ import { BookStoreThemeProvider } from './context/themeContext';
 import Home from './pages/Home';
 import Detail from './pages/Detail';
 import Error from './components/common/Error';
+import Signup from './pages/Signup';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,14 @@ const router = createBrowserRouter([
     element: (
       <Layout>
         <Detail />
+      </Layout>
+    ),
+  },
+  {
+    path: '/signup',
+    element: (
+      <Layout>
+        <Signup />
       </Layout>
     ),
   },

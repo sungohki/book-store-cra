@@ -3,19 +3,9 @@ import logo from '../../assets/images/logo.png';
 import { FaSignInAlt, FaRegUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useCategory } from '../../hooks/useCategory';
-import { useEffect, useState } from 'react';
-import { Category } from '../../models/category.model';
-import { fetchCategory } from '../../api/category.api';
 
 function Header() {
-  // const { category } = useCategory();
-  const [category, setCategory] = useState<Category[]>([]);
-
-  useEffect(() => {
-    fetchCategory().then((category) => {
-      setCategory(category);
-    });
-  }, []);
+  const { category } = useCategory();
 
   return (
     <HeaderStyle>
@@ -52,7 +42,7 @@ function Header() {
             </Link>
           </li>
           <li>
-            <Link to="/join">
+            <Link to="/signup">
               <FaRegUser />
               회원가입
             </Link>
