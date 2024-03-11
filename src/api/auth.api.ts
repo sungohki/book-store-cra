@@ -19,3 +19,12 @@ export const resetPassword = async (data: SignupProps) => {
   const res = await httpClient.put('/users/reset', data);
   return res;
 };
+
+interface LoginResponse {
+  token: string;
+}
+
+export const login = async (data: SignupProps) => {
+  const res = await httpClient.post<LoginResponse>('/users/login', data);
+  return res.data;
+};

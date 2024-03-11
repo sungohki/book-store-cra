@@ -24,6 +24,7 @@ function Button({ children, size, scheme, disabled, isLoading }: Props) {
 }
 
 const ButtonStyle = styled.button<Omit<Props, 'children'>>`
+  padding: 10px 0;
   font-size: ${({ theme, size }) => theme.button[size].fontSize};
   color: ${({ theme, scheme }) => theme.buttonScheme[scheme].color};
   background-color: ${({ theme, scheme }) =>
