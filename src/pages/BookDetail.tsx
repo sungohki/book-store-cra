@@ -1,0 +1,120 @@
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import { useBook } from '../hooks/useBook';
+import { getPicsumImageSrc } from '../utils/image';
+import Title from '../components/common/Title';
+import { BookDetail as IBookDetail } from '../models/book.model';
+import { formatDate, formatNumber } from '../utils/format';
+import { Link } from 'react-router-dom';
+import Ellipsis from '../components/common/Ellipsis';
+import LikeButton from '../components/book/LikeButton';
+
+const bookInfoList = [
+  {
+    label: '카테고리',
+    key: 'category_name',
+    filter: (book: IBookDetail) => (
+      <Link to={`/books?category_id=${book.category_id}`}>
+        {book.category_name}
+      </Link>
+    ),
+  },
+  { label: '포멧', key: 'form' },
+  { label: '페이지', key: 'pages' },
+  { label: 'ISBN', key: 'isbn' },
+  {
+    label: '출간일',
+    key: 'pub_date',
+    filter: (book: IBookDetail) => {
+      return formatDate(book.pub_date);
+    },
+  },
+  {
+    label: '가격',
+    key: 'price',
+    filter: (book: IBookDetail) => {
+      return `${formatNumber(book.price)} 원`;
+    },
+  },
+];
+
+function BookDeatil() {
+  const { bookId } = useParams();
+  const { book } = useBook(bookId);
+
+  if (!book) return null;
+
+  return (
+    <BookDeatilStyle>
+      <header className="header">
+        <div className="img">
+          <img src={getPicsumImageSrc(book.img)} alt={book.title} />
+        </div>
+        <div className="info">
+          <Title size="large" color="text">
+            {book.title}
+          </Title>
+          {bookInfoList.map((info) => (
+            <dl>
+              <dt>{info.label}</dt>
+              <dd>
+                {info.filter
+                  ? info.filter(book)
+                  : book[info.key as keyof IBookDetail]}
+              </dd>
+            </dl>
+          ))}
+          <p className="summary">{book.summary}</p>
+          <div className="like">
+            <LikeButton book={book} onClick={() => {}} />
+          </div>
+          <div className="add-cart">장바구니 넣기</div>
+        </div>
+      </header>
+      <div className="content">
+        <Title size="medium">상세 설명</Title>
+        <Ellipsis linelimit={4}>{book.detail}</Ellipsis>
+        <Title size="medium">목차</Title>
+        <Ellipsis>{book.contents}</Ellipsis>
+      </div>
+    </BookDeatilStyle>
+  );
+}
+const BookDeatilStyle = styled.div`
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 0 24px 0;
+
+    .img {
+      flex: 1;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      dl {
+        display: flex;
+        margin: 0;
+        dt {
+          width: 80px;
+          color: ${({ theme }) => theme.color.secondary};
+        }
+        a {
+          color: ${({ theme }) => theme.color.primary};
+        }
+      }
+    }
+  }
+
+  .content {
+  }
+`;
+
+export default BookDeatil;
