@@ -8,22 +8,35 @@ import BooksViewSwitcher from '../components/books/BooksViewSwitcher';
 import { useBooks } from '../hooks/useBooks';
 
 function Books() {
-  const { books, pagination } = useBooks();
-  console.log('books', books);
-  console.log('pagination', pagination);
+  const { books, pagination, isEmpty } = useBooks();
+
   return (
     <>
       <Title size="large">도서 검색 결과</Title>
       <BooksStyle>
-        <BooksFilter />
-        <BooksViewSwitcher />
-        <BooksList />
-        <BooksEmpty />
-        <Pagination />
+        <div className="filter">
+          <BooksFilter />
+          <BooksViewSwitcher />
+        </div>
+        {!isEmpty && <BooksList books={books} />}
+        {isEmpty && <BooksEmpty />}
+        {!isEmpty && <Pagination pagination={pagination} />}
       </BooksStyle>
     </>
   );
 }
-const BooksStyle = styled.div``;
+const BooksStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+
+  .filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+  }
+`;
 
 export default Books;

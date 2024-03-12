@@ -1,5 +1,5 @@
 import { ButtonScheme, ButtonSize } from '../../style/theme';
-import styled from 'styled-components';
+import styled, { ThemeConsumer } from 'styled-components';
 import React from 'react';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -33,7 +33,7 @@ function Button({
 }
 
 const ButtonStyle = styled.button<Omit<Props, 'children'>>`
-  padding: 10px 0;
+  padding: ${({ theme, size }) => theme.button[size].padding};
   font-size: ${({ theme, size }) => theme.button[size].fontSize};
   color: ${({ theme, scheme }) => theme.buttonScheme[scheme].color};
   background-color: ${({ theme, scheme }) =>

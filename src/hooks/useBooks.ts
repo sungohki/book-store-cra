@@ -13,6 +13,7 @@ export const useBooks = () => {
     total_count: 0,
     current_page: 1,
   });
+  const [isEmpty, setIsEmpty] = useState<Boolean>(true);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -26,11 +27,13 @@ export const useBooks = () => {
         ? Number(params.get(QUERYSTRING.PAGE))
         : 1,
       limit: LIMIT,
-    }).then((res) => {
-      setBooks(res.books);
-      setPagination(res.pagination);
+    }).then(({ books, pagination }) => {
+      // res destructuring
+      setBooks(books);
+      setPagination(pagination);
+      setIsEmpty(books.length === 0);
     });
   }, [location.search]);
 
-  return { books, pagination };
+  return { books, pagination, isEmpty };
 };
