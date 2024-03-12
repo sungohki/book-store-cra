@@ -1,3 +1,30 @@
+# Project Introduction
+
+## Source Configuration
+
+- api
+  : Collection of sending request & return response
+- assets
+  : Collection of visual placement on the screen
+- components
+  : Collection of sub components
+- constants
+  : Collection of frequantly used constant data
+- context
+  : Collection of Context files (ex. themeContext)
+- hooks
+  : Collecion of common feature
+- models
+  : Collection of data models
+- pages
+  : Collection of page components
+- store
+  : Collection of management Token
+- style
+  : Collection of option files for styling
+- utils
+  : Collection of utility functions
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
