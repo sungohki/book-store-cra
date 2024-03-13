@@ -5,14 +5,14 @@ import { FaAngleDown } from 'react-icons/fa';
 
 interface Props {
   children: React.ReactNode;
-  linelimit?: number;
+  lineLimit?: number;
 }
 
-function Ellipsis({ children, linelimit }: Props) {
+function Ellipsis({ children, lineLimit }: Props) {
   const [expanded, setExpanded] = useState(false);
   return (
     <>
-      <EllipsisStyle linelimit={linelimit} $expanded={expanded}>
+      <EllipsisStyle linelimit={lineLimit} $expanded={expanded}>
         <p>{children}</p>
         <div className="toggle">
           <Button

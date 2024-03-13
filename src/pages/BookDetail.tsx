@@ -8,6 +8,7 @@ import { formatDate, formatNumber } from '../utils/format';
 import { Link } from 'react-router-dom';
 import Ellipsis from '../components/common/Ellipsis';
 import LikeButton from '../components/book/LikeButton';
+import AddToCart from '../components/book/AddToCart';
 
 const bookInfoList = [
   {
@@ -40,7 +41,7 @@ const bookInfoList = [
 
 function BookDeatil() {
   const { bookId } = useParams();
-  const { book } = useBook(bookId);
+  const { book, likeToggle } = useBook(bookId);
 
   if (!book) return null;
 
@@ -66,14 +67,16 @@ function BookDeatil() {
           ))}
           <p className="summary">{book.summary}</p>
           <div className="like">
-            <LikeButton book={book} onClick={() => {}} />
+            <LikeButton book={book} onClick={() => likeToggle()} />
           </div>
-          <div className="add-cart">장바구니 넣기</div>
+          <div className="add-cart">
+            <AddToCart book={book} />
+          </div>
         </div>
       </header>
       <div className="content">
         <Title size="medium">상세 설명</Title>
-        <Ellipsis linelimit={4}>{book.detail}</Ellipsis>
+        <Ellipsis lineLimit={4}>{book.detail}</Ellipsis>
         <Title size="medium">목차</Title>
         <Ellipsis>{book.contents}</Ellipsis>
       </div>

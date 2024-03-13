@@ -35,3 +35,8 @@ export const fetchBook = async (bookId: string) => {
   const res = await httpClient.get<BookDetail>(`/books/${bookId}`);
   return res.data;
 };
+
+export const likeBook = async (bookId: number) => {
+  const res = await httpClient.post(`/likes/${bookId}`);
+  return res.data;
+};

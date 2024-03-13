@@ -9,7 +9,7 @@ export type ColorKey =
   | 'text';
 export type HeadingSize = 'large' | 'medium' | 'small';
 export type ButtonSize = 'large' | 'medium' | 'small';
-export type ButtonScheme = 'primary' | 'normal';
+export type ButtonScheme = 'primary' | 'normal' | 'like';
 export type LayoutWidth = 'large' | 'medium' | 'small';
 
 // intefaces
@@ -69,8 +69,9 @@ export const light: Theme = {
     small: { fontSize: '0.75rem', padding: '0.25rem 0.75rem' },
   },
   buttonScheme: {
-    primary: { color: 'white', backgroundColor: 'blue' },
+    primary: { color: 'white', backgroundColor: 'midnightblue' },
     normal: { color: 'black', backgroundColor: 'lightgray' },
+    like: { color: 'white', backgroundColor: 'coral' },
   },
   borderRadius: {
     default: '4px',
