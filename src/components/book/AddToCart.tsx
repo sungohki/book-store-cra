@@ -16,8 +16,7 @@ function AddToCart({ book }: Props) {
   const { addToCart, cartAdded } = useBook(book.id.toString());
 
   const handleQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-    setQuantity(Number(e.target.value || 1));
+    setQuantity(Number(e.target.value));
   };
 
   return (
@@ -71,11 +70,13 @@ const AddToCartStyle = styled.div<AddToCartStyleProps>`
   .added {
     position: absolute;
     text-align: center;
-    right: 25%;
+    right: 0%;
+    top: 100%;
     background: ${({ theme }) => theme.color.background};
     border-radius: ${({ theme }) => theme.borderRadius.default};
     padding: 8px 12px;
     opacity: ${({ $added }) => ($added ? '1' : '0')};
+    /* opacity: 1; */
     transition: all 0.5s ease;
     p {
       padding: 0 0 8px 0;

@@ -11,7 +11,7 @@ import { resetPassword, resetRequest } from '../api/auth.api';
 function ResetPassword() {
   const [resetRequested, setResetRequested] = useState(false);
   const navigate = useNavigate();
-  const showAlert = useAlert();
+  const { showAlert } = useAlert();
   const {
     register,
     handleSubmit,
