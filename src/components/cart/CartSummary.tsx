@@ -7,6 +7,9 @@ interface Props {
 }
 
 function CartSummary({ totalPrice, totalQuantity }: Props) {
+  console.log(totalPrice);
+  console.log(formatNumber(totalPrice));
+
   return (
     <CartSummaryStyle>
       <h1>주문 요약</h1>

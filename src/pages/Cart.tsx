@@ -27,6 +27,7 @@ function Cart() {
   const handleDeleteItem = (id: number) => {
     deleteCartItem(id);
   };
+
   const totalQuantity = useMemo(() => {
     return carts.reduce((acc, cur) => {
       if (checkedItems.includes(cur.id)) {
@@ -51,12 +52,15 @@ function Cart() {
     }
     const orderData: Omit<OrderSheet, 'delivery'> = {
       items: checkedItems,
-      totalQuantity: totalQuantity,
-      totalPrice: totalPrice,
-      firstBookTitle: carts[0].title,
+      total_quantity: totalQuantity,
+      total_price: totalPrice,
+      first_book_title: carts[0].title,
     };
     showConfirm('주문 하시겠습니까?', () => {
       navigate('/order', { state: orderData });
+
+      //test
+      // console.log(orderData);
     });
   };
 
@@ -100,7 +104,7 @@ function Cart() {
   );
 }
 
-const CartStyle = styled.div`
+export const CartStyle = styled.div`
   display: flex;
   gap: 24px;
   justify-content: space-between;
