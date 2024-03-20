@@ -1,5 +1,4 @@
-import { Cart } from '../models/cart.model';
-import { httpClient } from './http';
+import { requestHandler } from './http';
 
 interface AddCartParams {
   book_id: number;
@@ -7,16 +6,13 @@ interface AddCartParams {
 }
 
 export const addCart = async (params: AddCartParams) => {
-  const res = await httpClient.post('/carts', params);
-  return res.data;
+  return await requestHandler<AddCartParams>('post', '/carts', params);
 };
 
 export const fetchCart = async () => {
-  const res = await httpClient.get<Cart[]>('/carts');
-  return res.data;
+  return await requestHandler('get', '/carts');
 };
 
 export const deleteCart = async (cartId: number) => {
-  const res = await httpClient.delete(`/carts/${cartId}`);
-  return res.data;
+  return await requestHandler('delete', `/carts/${cartId}`);
 };

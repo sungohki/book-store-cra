@@ -1,15 +1,26 @@
 import styled from 'styled-components';
 import Title from '../components/common/Title';
-import InputText from '../components/common/InputText';
+import InputText, { InputTextType } from '../components/common/InputText';
 import Button from '../components/common/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-// import { signup } from '../api/auth.api';
 import { useAlert } from '../hooks/useAlert';
+import { signup } from '@/api/auth.api';
+
+type SignupPropsType = 'email' | 'password' | 'name' | 'contact';
+type SignupPropsTypeKor = '이메일' | '패스워드' | '이름' | '전화번호';
 
 export interface SignupProps {
   email: string;
   password: string;
+  name?: string;
+  contact?: string;
+}
+
+interface PrivacyInfo {
+  info: SignupPropsType;
+  infoKor: SignupPropsTypeKor;
+  inputType?: InputTextType;
 }
 
 function Signup() {
@@ -20,12 +31,18 @@ function Signup() {
     handleSubmit,
     formState: { errors },
   } = useForm<SignupProps>();
+  const privacyInfo: PrivacyInfo[] = [
+    { info: 'email', infoKor: '이메일', inputType: 'email' },
+    { info: 'password', infoKor: '패스워드', inputType: 'password' },
+    { info: 'name', infoKor: '이름', inputType: 'text' },
+    { info: 'contact', infoKor: '전화번호', inputType: 'text' },
+  ];
 
   const onSubmit = (data: SignupProps) => {
-    // signup(data).then((res) => {
+    signup(data);
     showAlert('회원 가입 완료');
+    console.log(data);
     navigate('/login');
-    // });
   };
 
   return (
@@ -33,26 +50,18 @@ function Signup() {
       <Title size="large">회원가입</Title>
       <SignupStyle>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <fieldset>
-            <InputText
-              placeHolder="이메일"
-              inputType="email"
-              {...register('email', { required: true })}
-            />
-            {errors.email && (
-              <p className="error-text">이메일을 입력해주세요.</p>
-            )}
-          </fieldset>
-          <fieldset>
-            <InputText
-              placeHolder="비밀번호"
-              inputType="password"
-              {...register('password', { required: true })}
-            />
-            {errors.password && (
-              <p className="error-text">비밀번호를 입력해주세요.</p>
-            )}
-          </fieldset>
+          {privacyInfo.map((item, index) => (
+            <fieldset key={index}>
+              <InputText
+                placeHolder={item.infoKor}
+                inputType={item.inputType}
+                {...register(item.info, { required: true })}
+              />
+              {errors.email && (
+                <p className="error-text">{item.infoKor} 입력 필요</p>
+              )}
+            </fieldset>
+          ))}
           <fieldset>
             <Button type="submit" size="medium" scheme="primary">
               회원가입

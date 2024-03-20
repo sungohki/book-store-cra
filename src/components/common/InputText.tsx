@@ -1,14 +1,16 @@
 import React, { ForwardedRef } from 'react';
 import styled from 'styled-components';
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+export type InputTextType = 'text' | 'email' | 'password' | 'number';
+export interface IInputText
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   placeHolder?: string;
-  inputType?: 'text' | 'email' | 'password' | 'number';
+  inputType?: InputTextType;
 }
 
 const InputText = React.forwardRef(
   (
-    { placeHolder, inputType, onChange, ...props }: Props,
+    { placeHolder, inputType, onChange, ...props }: IInputText,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (

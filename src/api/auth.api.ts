@@ -1,23 +1,16 @@
 import { SignupProps } from '../pages/Signup';
-import { httpClient } from './http';
+import { requestHandler } from './http';
 
 export const signup = async (userData: SignupProps) => {
-  const res = await httpClient.post('/users/join', {
-    ...userData,
-    name: 'kim',
-    contact: '010-1111-1111',
-  });
-  return res.data;
+  return await requestHandler<SignupProps>('post', '/users/join', userData);
 };
 
 export const resetRequest = async (data: SignupProps) => {
-  const res = await httpClient.post('/users/reset', data);
-  return res;
+  return await requestHandler<SignupProps>('post', '/users/reset', data);
 };
 
 export const resetPassword = async (data: SignupProps) => {
-  const res = await httpClient.put('/users/reset', data);
-  return res;
+  return await requestHandler<SignupProps>('put', '/users/reset', data);
 };
 
 interface LoginResponse {
@@ -25,6 +18,7 @@ interface LoginResponse {
 }
 
 export const login = async (data: SignupProps) => {
-  const res = await httpClient.post<LoginResponse>('/users/login', data);
-  return res.data;
+  return await requestHandler<SignupProps>('post', '/users/login', data).then(
+    (item) => item as LoginResponse
+  );
 };

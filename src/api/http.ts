@@ -33,3 +33,31 @@ export const createClient = (config?: AxiosRequestConfig) => {
 };
 
 export const httpClient = createClient();
+
+// 공통 Request Handler
+type RequestMethod = 'get' | 'post' | 'put' | 'delete';
+
+export const requestHandler = async <T>(
+  method: RequestMethod,
+  url: string,
+  payload?: T
+) => {
+  let res;
+
+  switch (method) {
+    case 'get':
+      res = await httpClient.get(url);
+      break;
+    case 'post':
+      res = await httpClient.post(url, payload);
+      break;
+    case 'put':
+      res = await httpClient.put(url, payload);
+      break;
+    case 'delete':
+      res = await httpClient.delete(url);
+      break;
+  }
+
+  return res.data;
+};
