@@ -9,20 +9,9 @@ export interface Order {
   total_price: number;
 }
 
-// {
-//     "items": [
-//         1,2,3
-//     ],
-//     "delivery": {
-//         "address": "서울시 북구",
-//         "receiver": "김나박이",
-//         "contact": "010-1111-1111"
-//     },
-//     "first_book_title": "백설공주들",
-//     "total_quantity": 3,
-//     "total_price": 60000,
-//     "user_id": 2
-// }
+export interface OrderListItem extends Order {
+  detail?: OrderDetailItem[];
+}
 
 export interface OrderSheet {
   items: number[];
@@ -36,4 +25,12 @@ export interface Delivery {
   address: string;
   receiver: string;
   contact: string;
+}
+
+export interface OrderDetailItem {
+  book_id: number;
+  author: string;
+  price: number;
+  quantity: number;
+  title: string;
 }

@@ -29,6 +29,8 @@ function Order() {
     formState: { errors },
   } = useForm<DeliveryForm>();
 
+  console.log(orderDataFromCart);
+
   const handlePay = (data: DeliveryForm) => {
     const orderData: OrderSheet = {
       ...orderDataFromCart,

@@ -21,7 +21,7 @@ function Cart() {
     if (checkedItems.includes(id)) {
       setCheckedItems(checkedItems.filter((item) => item !== id));
     } else {
-      setCheckedItems([...checkedItems, id]);
+      setCheckedItems([...checkedItems, id].sort());
     }
   };
   const handleDeleteItem = (id: number) => {
@@ -54,13 +54,11 @@ function Cart() {
       items: checkedItems,
       total_quantity: totalQuantity,
       total_price: totalPrice,
-      first_book_title: carts[0].title,
+      first_book_title: carts.find((item) => item.id === checkedItems[0])
+        ?.title as string,
     };
     showConfirm('주문 하시겠습니까?', () => {
       navigate('/order', { state: orderData });
-
-      //test
-      // console.log(orderData);
     });
   };
 
