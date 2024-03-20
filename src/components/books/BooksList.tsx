@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import BookItem from './BookItem';
-import { Book } from '../../models/book.model';
+import { Book } from '@/models/book.model';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { QUERYSTRING } from '../../constants/querystring';
+import { QUERYSTRING } from '@/constants/querystring';
 import { ViewMode } from './BooksViewSwitcher';
 
 interface Props {

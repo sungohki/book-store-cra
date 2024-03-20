@@ -1,4 +1,4 @@
-import { ButtonScheme, ButtonSize } from '../../style/theme';
+import { ButtonScheme, ButtonSize } from '@/style/theme';
 import styled from 'styled-components';
 import React from 'react';
 

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { BookStoreThemeProvider } from '../../context/themeContext';
+import { BookStoreThemeProvider } from '@/context/themeContext';
 import InputText from './InputText';
 import React from 'react';
 

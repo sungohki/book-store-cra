@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { Cart } from '../../models/cart.model';
+import { Cart } from '@/models/cart.model';
 import Title from '../common/Title';
 import Button from '../common/Button';
 import CheckIconButton from './CheckIconButton';
 import { useMemo } from 'react';
-import { useAlert } from '../../hooks/useAlert';
+import { useAlert } from '@/hooks/useAlert';
 
 interface Props {
   cart: Cart;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BookDetail } from '../../models/book.model';
+import { BookDetail } from '@/models/book.model';
 import Button from '../common/Button';
 
 interface Props {
