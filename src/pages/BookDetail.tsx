@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import Ellipsis from '../components/common/Ellipsis';
 import LikeButton from '../components/book/LikeButton';
 import AddToCart from '../components/book/AddToCart';
+import BookReview from '@/components/book/BookReview';
 
 const bookInfoList = [
   {
@@ -41,7 +42,7 @@ const bookInfoList = [
 
 function BookDeatil() {
   const { bookId } = useParams();
-  const { book, likeToggle } = useBook(bookId);
+  const { book, likeToggle, reviews, addReview } = useBook(bookId);
 
   if (!book) return null;
 
@@ -79,6 +80,8 @@ function BookDeatil() {
         <Ellipsis lineLimit={4}>{book.detail}</Ellipsis>
         <Title size="medium">목차</Title>
         <Ellipsis>{book.contents}</Ellipsis>
+        <Title size="medium">리뷰</Title>
+        <BookReview reviews={reviews} onAdd={addReview} />
       </div>
     </BookDeatilStyle>
   );
