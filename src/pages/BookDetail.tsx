@@ -10,6 +10,7 @@ import Ellipsis from '../components/common/Ellipsis';
 import LikeButton from '../components/book/LikeButton';
 import AddToCart from '../components/book/AddToCart';
 import BookReview from '@/components/book/BookReview';
+import { Tab, Tabs } from '@/components/common/Tabs';
 
 const bookInfoList = [
   {
@@ -76,12 +77,20 @@ function BookDeatil() {
         </div>
       </header>
       <div className="content">
-        <Title size="medium">상세 설명</Title>
-        <Ellipsis lineLimit={4}>{book.detail}</Ellipsis>
-        <Title size="medium">목차</Title>
-        <Ellipsis>{book.contents}</Ellipsis>
-        <Title size="medium">리뷰</Title>
-        <BookReview reviews={reviews} onAdd={addReview} />
+        <Tabs>
+          <Tab title="상세 설명">
+            <Title size="medium">상세 설명</Title>
+            <Ellipsis lineLimit={4}>{book.detail}</Ellipsis>
+          </Tab>
+          <Tab title="목차">
+            <Title size="medium">목차</Title>
+            <Ellipsis>{book.contents}</Ellipsis>
+          </Tab>
+          <Tab title="리뷰">
+            <Title size="medium">리뷰</Title>
+            <BookReview reviews={reviews} onAdd={addReview} />
+          </Tab>
+        </Tabs>
       </div>
     </BookDeatilStyle>
   );
