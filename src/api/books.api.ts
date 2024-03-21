@@ -21,6 +21,7 @@ export const fetchBooks = async (params: FetchParams) => {
     });
     return res.data;
   } catch (err) {
+    console.log(err);
     return {
       books: [],
       pagination: {
