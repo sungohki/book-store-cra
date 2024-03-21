@@ -9,12 +9,14 @@ import { useAuthStore } from '../store/authStore';
 import { useAlert } from './useAlert';
 import { addCart } from '../api/carts.api';
 import { addBookReview, fetchBookReview } from '@/api/review.api';
+import { useToast } from './useToast';
 
 export const useBook = (bookId: string | undefined) => {
   const [book, setBook] = useState<BookDetail | null>(null);
   const [cartAdded, setCartAdded] = useState<boolean>(false);
   const { isLoggedIn } = useAuthStore();
   const { showAlert } = useAlert();
+  const { showToast } = useToast();
   const [reviews, setReview] = useState<BookReviewItem[]>([]);
 
   const likeToggle = () => {
@@ -27,10 +29,12 @@ export const useBook = (bookId: string | undefined) => {
     if (book.liked) {
       likeBook(book.id).then(() => {
         setBook({ ...book, liked: false, likes: book.likes - 1 });
+        showToast('좋아요가 취소되었습니다.');
       });
     } else {
       likeBook(book.id).then(() => {
         setBook({ ...book, liked: true, likes: book.likes + 1 });
+        showToast('좋아요가 추가되었습니다.');
       });
     }
   };
