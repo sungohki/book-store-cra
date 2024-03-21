@@ -2,10 +2,9 @@ import styled from 'styled-components';
 import Title from '../components/common/Title';
 import InputText, { InputTextType } from '../components/common/InputText';
 import Button from '../components/common/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useAlert } from '../hooks/useAlert';
-import { signup } from '@/api/auth.api';
+import { useAuth } from '@/hooks/useAuth';
 
 type SignupPropsType = 'email' | 'password' | 'name' | 'contact';
 type SignupPropsTypeKor = '이메일' | '패스워드' | '이름' | '전화번호';
@@ -24,8 +23,8 @@ interface PrivacyInfo {
 }
 
 function Signup() {
-  const navigate = useNavigate();
-  const { showAlert } = useAlert();
+  const { userSignup } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -39,10 +38,7 @@ function Signup() {
   ];
 
   const onSubmit = (data: SignupProps) => {
-    signup(data);
-    showAlert('회원 가입 완료');
-    console.log(data);
-    navigate('/login');
+    userSignup(data);
   };
 
   return (

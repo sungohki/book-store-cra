@@ -1,14 +1,14 @@
 import { styled } from 'styled-components';
 import logo from '@/assets/images/logo.png';
 import { FaSignInAlt, FaRegUser } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCategory } from '@/hooks/useCategory';
-import { useAuthStore } from '@/store/authStore';
-import { useEffect } from 'react';
+import { removeToken, useAuthStore } from '@/store/authStore';
 
 function Header() {
   const { category } = useCategory();
-  const { isLoggedIn, storeLogin, storeLogout } = useAuthStore();
+  const { isLoggedIn, storeLogout } = useAuthStore();
+  const navigate = useNavigate();
 
   return (
     <HeaderStyle>
@@ -46,7 +46,15 @@ function Header() {
               <Link to="/orderlist">주문내역</Link>
             </li>
             <li>
-              <button onClick={storeLogout}>로그아웃</button>
+              <button
+                onClick={() => {
+                  storeLogout();
+                  removeToken();
+                  navigate('/login');
+                }}
+              >
+                로그아웃
+              </button>
             </li>
           </ul>
         )}
