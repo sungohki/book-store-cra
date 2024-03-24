@@ -1,4 +1,5 @@
 import Title from '@/components/common/Title';
+import Banner from '@/components/common/banner/Banner';
 import MainBest from '@/components/main/MainBest';
 import MainNewBooks from '@/components/main/MainNewBooks';
 import MainReview from '@/components/main/MainReview';
@@ -6,11 +7,12 @@ import { useMain } from '@/hooks/useMain';
 import styled from 'styled-components';
 
 function Home() {
-  const { reviews, newBooks, bestBooks } = useMain();
+  const { reviews, newBooks, bestBooks, banners } = useMain();
 
   return (
     <HomeStyle>
       {/* Banner */}
+      <Banner banners={banners} />
 
       {/* BestSeller */}
       <section className="section">

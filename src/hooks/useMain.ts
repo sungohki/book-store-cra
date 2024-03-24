@@ -1,5 +1,7 @@
+import { fetchBanners } from '@/api/banner.api';
 import { fetchBestBooks, fetchBooks } from '@/api/books.api';
 import { fetchReviewAll } from '@/api/review.api';
+import { Banner } from '@/models/banner.model';
 import { Book, BookReviewItem } from '@/models/book.model';
 import { useEffect, useState } from 'react';
 
@@ -7,9 +9,15 @@ export const useMain = () => {
   const [reviews, setReviews] = useState<BookReviewItem[]>([]);
   const [newBooks, setNewBooks] = useState<Book[]>([]);
   const [bestBooks, setBestBooks] = useState<Book[]>([]);
+  const [banners, setBanners] = useState<Banner[]>([]);
 
   useEffect(() => {
-    // fetch bset books api
+    // fetch banners api
+    fetchBanners().then((banners) => {
+      setBanners(banners);
+    });
+
+    // fetch best books api
     fetchBestBooks().then((books) => {
       setBestBooks(books);
     });
@@ -30,5 +38,5 @@ export const useMain = () => {
     });
   }, []);
 
-  return { reviews, newBooks, bestBooks };
+  return { reviews, newBooks, bestBooks, banners };
 };
