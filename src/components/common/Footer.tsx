@@ -1,6 +1,19 @@
 import styled from 'styled-components';
 import logo from '@/assets/images/logo.png';
 
+function Footer() {
+  return (
+    <FooterStyle>
+      <h1 className="logo">
+        <img src={logo} alt="Book Store" />
+      </h1>
+      <div className="copyright">
+        <p>copyright(c), 2024, Book Store.</p>
+      </div>
+    </FooterStyle>
+  );
+}
+
 const FooterStyle = styled.footer`
   width: 100%;
   margin: 0 auto;
@@ -22,18 +35,11 @@ const FooterStyle = styled.footer`
       color: ${({ theme }) => theme.color.text};
     }
   }
+
+  @media screen AND (${({ theme }) => theme.mediaQuery.mobile}) {
+    flex-direction: column;
+    text-align: center;
+  }
 `;
 
-function Footer() {
-  return (
-    <FooterStyle>
-      <h1 className="logo">
-        <img src={logo} alt="Book Store" />
-      </h1>
-      <div className="copyright">
-        <p>copyright(c), 2024, Book Store.</p>
-      </div>
-    </FooterStyle>
-  );
-}
 export default Footer;

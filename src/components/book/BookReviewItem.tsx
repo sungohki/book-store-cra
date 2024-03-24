@@ -11,7 +11,7 @@ const Star = (props: Pick<IBookReviewItem, 'score'>) => {
   return (
     <span className="star">
       {Array.from({ length: props.score }, (item, index) => {
-        return <FaStar />;
+        return <FaStar key={index} />;
       })}
     </span>
   );
