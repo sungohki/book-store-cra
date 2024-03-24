@@ -14,11 +14,12 @@ import OrderList from './pages/OrderList';
 import { QueryClientProvider } from 'react-query';
 import { queryClient } from './api/queryClient';
 import ToastContainer from './components/common/toast/ToastContainer';
+import Home from './pages/Home';
 
 const routeList = [
   {
     path: '/',
-    element: <Books />,
+    element: <Home />,
   },
   {
     path: '/books',
