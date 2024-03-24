@@ -39,3 +39,7 @@ export const fetchBook = async (bookId: string) => {
 export const likeBook = async (bookId: number) => {
   return await requestHandler('post', `/likes/${bookId}`);
 };
+
+export const fetchBestBooks = async () => {
+  return await requestHandler<Book[]>('get', '/books/best');
+};
